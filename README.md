@@ -267,3 +267,50 @@ HAVING COUNT(*) < 5;
 select department, count(department) as depCount from worker
 group by department
 order by depCount desc limit 5;
+
+## 11-02-2025
+create table student (
+	s_id int primary key,
+    s_name varchar(25) not null,
+    s_department varchar(25) not null
+);
+
+insert into student values (1001,"Jayanth","ECE"),(1002,"Praveen","CSE"),(1003,"Logesh","Mech"),(1006,'karthick','Aero'),(1007,"Mahesh","Civil");
+
+select * from student;
+
+create table VIT(
+s_id int primary key,
+s_cgpa varchar(5) not null
+);
+insert into vit values (1001,'7.2'),(1002,'8.6'),(1007,'9.25');
+select * from vit;
+
+select * from student cross join vit;
+
+select * from student inner join vit where student.s_id=vit.s_id;
+
+select * from student natural join vit;
+
+select * from student left outer join vit on (student.s_id=vit.s_id);
+select * from student right outer join vit on (student.s_id=vit.s_id);
+-- full outer join not supported;
+
+SELECT * 
+FROM Worker 
+INNER JOIN Bonus ON WORKER_ID = WORKER_REF_ID
+UNION 
+SELECT * 
+FROM Worker 
+INNER JOIN Title ON WORKER_ID = WORKER_REF_ID;
+
+SELECT w.*, b.BONUS_AMOUNT, b.BONUS_DATE, t.WORKER_TITLE, t.AFFECTED_FROM
+FROM Worker w
+LEFT JOIN Bonus b ON w.WORKER_ID = b.WORKER_REF_ID
+LEFT JOIN Title t ON w.WORKER_ID = t.WORKER_REF_ID;
+
+SELECT w.*, b.BONUS_AMOUNT, b.BONUS_DATE, t.WORKER_TITLE, t.AFFECTED_FROM
+FROM Worker w
+INNER JOIN Bonus b ON w.WORKER_ID = b.WORKER_REF_ID
+INNER JOIN Title t ON w.WORKER_ID = t.WORKER_REF_ID
+WHERE t.WORKER_TITLE = 'Manager';
