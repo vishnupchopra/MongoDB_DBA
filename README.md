@@ -1,5 +1,7 @@
 # MongoDB_DBA
 
+## the alignment is a mess, this was not intentional, but now it is what it is
+
 show databases;
 use dbone;
 desc eng;
