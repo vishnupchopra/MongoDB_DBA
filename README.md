@@ -312,3 +312,75 @@ FROM Worker w
 INNER JOIN Bonus b ON w.WORKER_ID = b.WORKER_REF_ID
 INNER JOIN Title t ON w.WORKER_ID = t.WORKER_REF_ID
 WHERE t.WORKER_TITLE = 'Manager';
+
+use JBSQL1;
+CREATE DATABASE JBSQL1;
+CREATE table Customer (
+	FirstName varchar(50),
+    LastName varchar(50),
+    Age int
+);
+
+INSERT INTO Customer 
+(FirstName, LastName, Age, City)
+VALUES
+('Joey', 'Tribiani', 40, 'NewYork'),
+('Chandler', 'Bing', 41, 'NewYork'),
+('Ross', 'Geller', 42, 'NewYork'),
+('Phoebe', 'Buffet', 43, 'NewYork'),
+('Rachel', 'Something', 44, 'NewYork'),
+('Monica', 'Geller', 45, 'NewYork');
+
+SELECT * FROM Customer
+where FirstName like '%o%' and LastName like '%e%';
+-- we can use like with wildchars like %;
+
+-- update
+update Customer
+set age=41
+where FirstName like '%o%' and LastName like '%e%';
+
+-- DELETE Customer will delete all data in table
+-- DELETE Customer
+-- where FirstName='something'
+-- and LastName='something';
+
+-- add a column
+alter table Customer
+add City varchar(50);
+
+update Customer
+set City='NewYork';
+
+drop table Customer;
+
+create table Customer
+(
+	Id int primary key auto_increment,
+    FirstName varchar(25),
+    LastName varchar(25),
+    Age int,
+    City varchar(50)
+);
+
+select * from Customer;
+
+create table Products
+(
+	id int primary key auto_increment,
+    ProductName varchar(50)
+);
+
+select * from products;
+
+drop table products;
+
+insert into products (ProductName) values
+('Baseball'),
+('FootBall');
+
+alter table products
+add Price float;
+
+update products
+set Price=69.96;
