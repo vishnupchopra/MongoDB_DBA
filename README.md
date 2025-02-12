@@ -158,7 +158,6 @@ UNION ALL
 SELECT * FROM Worker
 
 
-## 10-02-2025
 SELECT department, COUNT(*) AS departmentCount
 FROM worker
 GROUP BY department
@@ -268,7 +267,6 @@ select department, count(department) as depCount from worker
 group by department
 order by depCount desc limit 5;
 
-## 11-02-2025
 create table student (
 	s_id int primary key,
     s_name varchar(25) not null,
