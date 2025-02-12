@@ -1,4 +1,117 @@
 # MongoDB_DBA
+
+show databases;
+use dbone;
+desc eng;
+show tables;
+
+select * from eng;
+
+ALTER TABLE eng RENAME column 
+    s_name TO s_Name;
+    
+delete from eng where s_id=10001;
+
+update eng set s_Name='john' where s_id=10001;
+
+insert into eng values (10001, 'john', 99);
+
+update eng set s_mark = s_mark+1;
+
+create database practice1;
+use practice1;
+create table Mech(s_id int,s_name varchar(25));
+START TRANSACTION;
+insert into Mech values (101,'jayanth');
+savepoint A;
+update Mech set s_id=1001 where s_id=101;
+savepoint B;
+insert into Mech values (102,'chris');
+savepoint C;
+rollback to B;
+select * from Mech;
+commit;
+start transaction;
+savepoint A;
+insert into Mech values (102,'chris');
+savepoint B;
+insert into Mech values (103,'maxx');
+select * from Mech;
+rollback to A;
+-- rollback to B; -- can't go from A to B again once rolled back;
+commit; -- commit to end the transaction;
+
+CREATE DATABASE ORG123;
+SHOW DATABASES;
+USE ORG123;
+
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account');
+        
+select * from Worker;
+
+CREATE TABLE SalesRep (
+    SalesRep_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    FIRST_NAME CHAR(25),
+    LAST_NAME CHAR(25),
+    SALARY INT(15),
+    JOINING_DATE DATETIME,
+    DEPARTMENT CHAR(25)
+);
+
+INSERT INTO SalesRep
+	(SalesRep_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monik', 'Aror', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharik', 'Verm', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Visha', 'Singha', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitab', 'Sing', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vive', 'Bhat', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipu', 'Diwa', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satis', 'Kuma', 75000, '14-01-20 09.00.00', 'Account');
+        
+select * from SalesRep;
+
+SELECT department FROM worker
+UNION -- will only take unique value;
+SELECT department FROM salesrep
+ORDER BY department;
+
+SELECT worker_id, first_name,department,
+CASE
+    WHEN salary > 300000 THEN 'Rich people'
+    WHEN salary <=300000 && salary >=100000 THEN 'Middle stage'
+    ELSE 'Poor people'
+END 
+AS People_stage_wise
+from worker;
+
+-- unique department and total employees
+SELECT DEPARTMENT, COUNT(*) AS TOTAL_EMPLOYEES
+FROM SalesRep
+GROUP BY DEPARTMENT;
+
+SELECT 'HR' AS DEPARTMENT, COUNT(*) AS TOTAL_EMPLOYEES FROM SalesRep WHERE DEPARTMENT = 'HR'
+UNION
+SELECT 'Admin', COUNT(*) FROM SalesRep WHERE DEPARTMENT = 'Admin'
+UNION
+SELECT 'Account', COUNT(*) FROM SalesRep WHERE DEPARTMENT = 'Account';
+
 CREATE DATABASE ORG1234;
 SHOW DATABASES;
 USE ORG1234;
