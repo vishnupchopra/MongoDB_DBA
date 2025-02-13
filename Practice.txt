@@ -171,6 +171,59 @@ HAVING COUNT(*) = (
 
 insert into worker value (008, 'kumar', 'Satish', 75000, '14-01-20 09.00.00', 'Account');
 
+CREATE TABLE Enroll (
+  sno INT,
+    cno INT,
+    jdate DATE,
+    PRIMARY KEY (sno, cno),
+    FOREIGN KEY (sno)
+    REFERENCES Student(sno)  -- Corrected
+    ON DELETE CASCADE,
+    FOREIGN KEY (cno)
+    REFERENCES Course(cno)   -- Corrected
+    ON DELETE CASCADE
+        );
+	INSERT INTO Enroll(sno,cno,jdate) 
+ VALUES(1, 101, '5-jun-2021'),
+       (1, 102, '5-jun-2021'),
+       (2, 103, '6-jun-2021');
+create database saturday;
+use saturday;
+
+create table category(
+c_id int primary key,
+c_name varchar(25) not null unique,
+c_decrp varchar(250) not null
+);
+
+insert into category values (101, 'electronics', 'it stores all set of electronics items');select * from category;
+desc category;
+
+CREATE TABLE Products (
+    P_ID int primary key,
+    p_Name varchar(250) NOT NULL,
+    c_id int ,
+    CONSTRAINT c_id FOREIGN KEY (c_id)
+    REFERENCES category(c_id) on delete cascade
+);
+
+insert into products values (904, 'INTEL I5 Processor', 101);
+select * from products;
+delete from category where c_id=101;
+select * from category;
+
+CREATE TABLE College (
+    cno INT PRIMARY KEY,
+    cname VARCHAR(255) 
+  );
+
+CREATE TABLE Department (
+ dno INT PRIMARY KEY,
+dname VARCHAR(255),  
+cno INT,
+FOREIGN KEY (cno) REFERENCES College(cno)
+);
+
 USE ORG1234;
 
 CREATE TABLE WorkerWithCity (
