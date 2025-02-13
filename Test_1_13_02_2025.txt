@@ -73,8 +73,8 @@ INSERT INTO Title
  where first_name like '_____h';
  
  -- Question 5
- select count(DEPARTMENT) as department_count from worker
- where DEPARTMENT='Admin';
+ select count(department) as department_count from worker
+ where department='Admin';
  
  -- 6.Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000.
  select first_name, last_name from worker
@@ -86,7 +86,7 @@ INSERT INTO Title
  order by department_count desc;
  
  -- 8.Write an SQL query to determine the 5th highest salary without using TOP or limit method.
- SELECT DISTINCT Salary
+SELECT distinct salary, first_name, last_name
 FROM Worker W1
 WHERE 4 = (
     SELECT COUNT(DISTINCT Salary)
@@ -102,7 +102,7 @@ AND W1.WORKER_ID != W2.WORKER_ID;
 
 -- 10. Write an SQL query to fetch the departments that have less than three people in it.
 
-SELECT DEPARTMENT, COUNT(WORKER_ID) as NumberOfWorkers
+SELECT department, COUNT(worker_id) as NumberOfWorkers
 FROM Worker
-GROUP BY DEPARTMENT
-HAVING COUNT(WORKER_ID) < 3;
+GROUP BY department
+HAVING COUNT(worker_id) < 3;
